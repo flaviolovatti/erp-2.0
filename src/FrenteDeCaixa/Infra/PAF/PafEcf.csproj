@@ -1,0 +1,740 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
+  <PropertyGroup>
+    <ProjectType>Local</ProjectType>
+    <ProductVersion>8.0.50727</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{ED1E72B9-DC9E-4938-B580-67C42D8B3D3F}</ProjectGuid>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ApplicationIcon>App.ico</ApplicationIcon>
+    <AssemblyKeyContainerName>
+    </AssemblyKeyContainerName>
+    <AssemblyName>PafEcf</AssemblyName>
+    <AssemblyOriginatorKeyFile>
+    </AssemblyOriginatorKeyFile>
+    <DefaultClientScript>JScript</DefaultClientScript>
+    <DefaultHTMLPageLayout>Grid</DefaultHTMLPageLayout>
+    <DefaultTargetSchema>IE50</DefaultTargetSchema>
+    <DelaySign>false</DelaySign>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>PafEcf</RootNamespace>
+    <RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
+    <StartupObject>PafEcf.tsProgram</StartupObject>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <OldToolsVersion>2.0</OldToolsVersion>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <OutputPath>bin\Debug\</OutputPath>
+    <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
+    <BaseAddress>285212672</BaseAddress>
+    <CheckForOverflowUnderflow>false</CheckForOverflowUnderflow>
+    <ConfigurationOverrideFile>
+    </ConfigurationOverrideFile>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DocumentationFile>
+    </DocumentationFile>
+    <DebugSymbols>true</DebugSymbols>
+    <FileAlignment>4096</FileAlignment>
+    <NoStdLib>false</NoStdLib>
+    <NoWarn>
+    </NoWarn>
+    <Optimize>false</Optimize>
+    <RegisterForComInterop>false</RegisterForComInterop>
+    <RemoveIntegerChecks>false</RemoveIntegerChecks>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <OutputPath>bin\Release\</OutputPath>
+    <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
+    <BaseAddress>285212672</BaseAddress>
+    <CheckForOverflowUnderflow>false</CheckForOverflowUnderflow>
+    <ConfigurationOverrideFile>
+    </ConfigurationOverrideFile>
+    <DefineConstants>TRACE</DefineConstants>
+    <DocumentationFile>
+    </DocumentationFile>
+    <DebugSymbols>false</DebugSymbols>
+    <FileAlignment>4096</FileAlignment>
+    <NoStdLib>false</NoStdLib>
+    <NoWarn>
+    </NoWarn>
+    <Optimize>true</Optimize>
+    <RegisterForComInterop>false</RegisterForComInterop>
+    <RemoveIntegerChecks>false</RemoveIntegerChecks>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="ACBrFramework.Net">
+      <HintPath>..\..\..\..\Documents and Settings\Eije\Meus documentos\Visual Studio 2010\Controls\ACBrFramework\ACBrFramework.Net.dll</HintPath>
+    </Reference>
+    <Reference Include="MySql.Data, Version=6.6.5.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL" />
+    <Reference Include="System">
+      <Name>System</Name>
+    </Reference>
+    <Reference Include="System.Data">
+      <Name>System.Data</Name>
+    </Reference>
+    <Reference Include="System.Drawing">
+      <Name>System.Drawing</Name>
+    </Reference>
+    <Reference Include="System.Windows.Forms">
+      <Name>System.Windows.Forms</Name>
+    </Reference>
+    <Reference Include="System.XML">
+      <Name>System.XML</Name>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App.ico" />
+    <Compile Include="Infra\dbConnection.cs" />
+    <Compile Include="Infra\UECF.cs" />
+    <Compile Include="Infra\UPAF.cs" />
+    <Compile Include="Infra\USintegra.cs" />
+    <Compile Include="Infra\USpedFiscal.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="tsProgram.cs" />
+    <Compile Include="Util\Log.cs" />
+    <Compile Include="View\UArquivoMFD.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\UArquivoMFD.Designer.cs">
+      <DependentUpon>UArquivoMFD.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\UCancelaPreVenda.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\UCancelaPreVenda.Designer.cs">
+      <DependentUpon>UCancelaPreVenda.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\UCargaPDV.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\UCargaPDV.Designer.cs">
+      <DependentUpon>UCargaPDV.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\UCarregaDAV.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\UCarregaDAV.Designer.cs">
+      <DependentUpon>UCarregaDAV.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\UCheques.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\UCheques.Designer.cs">
+      <DependentUpon>UCheques.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\UDataModule.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="View\UDataModule.Designer.cs">
+      <DependentUpon>UDataModule.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\UDAVEmitidos.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\UDAVEmitidos.Designer.cs">
+      <DependentUpon>UDAVEmitidos.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\UDescontoAcrescimo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\UDescontoAcrescimo.Designer.cs">
+      <DependentUpon>UDescontoAcrescimo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\UEfetuaPagamento.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\UEfetuaPagamento.Designer.cs">
+      <DependentUpon>UEfetuaPagamento.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\UEncerraMovimento.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\UEncerraMovimento.Designer.cs">
+      <DependentUpon>UEncerraMovimento.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\UEspelhoMFD.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\UEspelhoMFD.Designer.cs">
+      <DependentUpon>UEspelhoMFD.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\UEstoque.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\UEstoque.Designer.cs">
+      <DependentUpon>UEstoque.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\UFechaEfetuaPagamento.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\UFechaEfetuaPagamento.Designer.cs">
+      <DependentUpon>UFechaEfetuaPagamento.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\UFichaTecnica.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\UFichaTecnica.Designer.cs">
+      <DependentUpon>UFichaTecnica.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\UIdentificaCliente.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\UIdentificaCliente.Designer.cs">
+      <DependentUpon>UIdentificaCliente.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\UImportaCliente.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\UImportaCliente.Designer.cs">
+      <DependentUpon>UImportaCliente.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\UImportaNumero.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\UImportaNumero.Designer.cs">
+      <DependentUpon>UImportaNumero.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\UImportaProduto.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\UImportaProduto.Designer.cs">
+      <DependentUpon>UImportaProduto.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\UIniciaMovimento.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\UIniciaMovimento.Designer.cs">
+      <DependentUpon>UIniciaMovimento.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\ULMFC.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\ULMFC.Designer.cs">
+      <DependentUpon>ULMFC.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\ULMFS.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\ULMFS.Designer.cs">
+      <DependentUpon>ULMFS.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\ULocaliza.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\ULocaliza.Designer.cs">
+      <DependentUpon>ULocaliza.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\ULoginGerenteSupervisor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\ULoginGerenteSupervisor.Designer.cs">
+      <DependentUpon>ULoginGerenteSupervisor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\UMeiosPagamento.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\UMeiosPagamento.Designer.cs">
+      <DependentUpon>UMeiosPagamento.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\UMenuFiscal.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\UMenuFiscal.Designer.cs">
+      <DependentUpon>UMenuFiscal.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\UMenuOperacoes.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\UMenuOperacoes.Designer.cs">
+      <DependentUpon>UMenuOperacoes.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\UMenuPrincipal.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\UMenuPrincipal.Designer.cs">
+      <DependentUpon>UMenuPrincipal.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\UMesclaDAV.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\UMesclaDAV.Designer.cs">
+      <DependentUpon>UMesclaDAV.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\UMesclaPreVenda.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\UMesclaPreVenda.Designer.cs">
+      <DependentUpon>UMesclaPreVenda.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\UMovimentoAberto.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\UMovimentoAberto.Designer.cs">
+      <DependentUpon>UMovimentoAberto.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\UMovimentoECF.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\UMovimentoECF.Designer.cs">
+      <DependentUpon>UMovimentoECF.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\UNotaFiscal.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\UNotaFiscal.Designer.cs">
+      <DependentUpon>UNotaFiscal.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\UParcelamento.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\UParcelamento.Designer.cs">
+      <DependentUpon>UParcelamento.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\UPenDrive.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\UPenDrive.Designer.cs">
+      <DependentUpon>UPenDrive.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\USplash.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\USplash.Designer.cs">
+      <DependentUpon>USplash.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\USubMenuGerente.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\USubMenuGerente.Designer.cs">
+      <DependentUpon>USubMenuGerente.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\USubMenuSupervisor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\USubMenuSupervisor.Designer.cs">
+      <DependentUpon>USubMenuSupervisor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\UValorReal.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\UValorReal.Designer.cs">
+      <DependentUpon>UValorReal.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\UVendasPeriodo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\UVendasPeriodo.Designer.cs">
+      <DependentUpon>UVendasPeriodo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="VO\VendaDetalheVO.cs" />
+    <Compile Include="VO\BancoVO.cs" />
+    <Compile Include="VO\CaixaVO.cs" />
+    <Compile Include="VO\CFOPVO.cs" />
+    <Compile Include="VO\ChequeClienteVO.cs" />
+    <Compile Include="VO\ClienteVO.cs" />
+    <Compile Include="VO\ConfiguracaoVO.cs" />
+    <Compile Include="VO\DAVDetalheVO.cs" />
+    <Compile Include="VO\DocumentosEmitidosVO.cs" />
+    <Compile Include="VO\EmpresaVO.cs" />
+    <Compile Include="VO\FuncionarioVO.cs" />
+    <Compile Include="VO\ImpressoraVO.cs" />
+    <Compile Include="VO\MovimentoVO.cs" />
+    <Compile Include="VO\OperadorVO.cs" />
+    <Compile Include="VO\PreVendaDetalheVO.cs" />
+    <Compile Include="VO\ProdutoVO.cs" />
+    <Compile Include="VO\R02VO.cs" />
+    <Compile Include="VO\R03VO.cs" />
+    <Compile Include="VO\R06VO.cs" />
+    <Compile Include="VO\R07VO.cs" />
+    <Compile Include="VO\RecebimentoNaoFiscalVO.cs" />
+    <Compile Include="VO\SangriaVO.cs" />
+    <Compile Include="VO\SituacaoClienteVO.cs" />
+    <Compile Include="VO\SuprimentoVO.cs" />
+    <Compile Include="VO\TotalTipoPagamentoVO.cs" />
+    <Compile Include="VO\VendaCabecalhoVO.cs" />
+    <Compile Include="Controller\MovimentoController.cs" />
+    <Compile Include="Controller\ProdutoController.cs" />
+    <Compile Include="Controller\CaixaController.cs" />
+    <Compile Include="Controller\OperadorController.cs" />
+    <Compile Include="Controller\VendaController.cs" />
+    <Compile Include="Controller\TipoPagamentoController.cs" />
+    <Compile Include="Controller\TotalTipoPagamentoController.cs" />
+    <Compile Include="View\UCaixa.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\UCaixa.Designer.cs">
+      <DependentUpon>UCaixa.cs</DependentUpon>
+    </Compile>
+    <Compile Include="VO\PosicaoComponentesVO.cs" />
+    <Compile Include="Controller\ConfiguracaoController.cs" />
+    <Compile Include="VO\ContadorVO.cs" />
+    <Compile Include="VO\ResolucaoVO.cs" />
+    <Compile Include="VO\FichaTecnicaVO.cs" />
+    <Compile Include="VO\ProdutoPromocaoVO.cs" />
+    <Compile Include="VO\TurnoVO.cs" />
+    <Compile Include="Util\Biblioteca.cs" />
+    <Compile Include="Controller\VendedorController.cs" />
+    <Compile Include="Controller\ClienteController.cs" />
+    <Compile Include="Controller\PreVendaController.cs" />
+    <Compile Include="Controller\DAVController.cs" />
+    <Compile Include="Controller\EmpresaController.cs" />
+    <Compile Include="Controller\ImpressoraController.cs" />
+    <Compile Include="Controller\RegistroRController.cs" />
+    <Compile Include="VO\R04VO.cs" />
+    <Compile Include="VO\R05VO.cs" />
+    <Compile Include="VO\MeiosPagamentoVO.cs" />
+    <Compile Include="Controller\SintegraController.cs" />
+    <Compile Include="VO\Sintegra60AVO.cs" />
+    <Compile Include="VO\Sintegra60MVO.cs" />
+    <Compile Include="VO\Sintegra60DVO.cs" />
+    <Compile Include="Controller\ContadorController.cs" />
+    <Compile Include="Controller\UnidadeController.cs" />
+    <Compile Include="VO\R01VO.cs" />
+    <Compile Include="VO\Sintegra60RVO.cs" />
+    <Compile Include="VO\Sintegra61RVO.cs" />
+    <Compile Include="VO\SpedFiscalC390VO.cs" />
+    <Compile Include="VO\SpedFiscalC321VO.cs" />
+    <Compile Include="Controller\SpedFiscalController.cs" />
+    <Compile Include="VO\SpedFiscalC425VO.cs" />
+    <Compile Include="VO\SpedFiscalC490VO.cs" />
+    <Compile Include="Util\Constantes.cs" />
+    <Compile Include="Controller\SituacaoClienteController.cs" />
+    <Compile Include="Controller\FichaTecnicaController.cs" />
+    <Compile Include="VO\TipoPagamentoVO.cs" />
+    <Compile Include="Controller\ParcelaController.cs" />
+    <Compile Include="VO\FechamentoVO.cs" />
+    <Compile Include="Controller\FechamentoController.cs" />
+    <Compile Include="Controller\ProdutoPromocaoController.cs" />
+    <Compile Include="Controller\BancoController.cs" />
+    <Compile Include="Controller\CFOPController.cs" />
+    <Compile Include="Controller\TurnoController.cs" />
+    <Compile Include="VO\LogImportacaoVO.cs" />
+    <Compile Include="Controller\LogImportacaoController.cs" />
+    <Compile Include="Controller\ChequeController.cs" />
+    <Compile Include="Controller\NotaFiscalController.cs" />
+    <Compile Include="VO\DavCabecalhoVO.cs" />
+    <Compile Include="VO\ContasParcelasVO.cs" />
+    <Compile Include="VO\ContasPagarReceberVO.cs" />
+    <Compile Include="VO\NotaFiscalDetalheVO.cs" />
+    <Compile Include="VO\NotaFiscalCabecalhoVO.cs" />
+    <Compile Include="VO\UnidadeProdutoVO.cs" />
+    <Compile Include="VO\PreVendaCabecalhoVO.cs" />
+    <Compile Include="Controller\ComponentesController.cs" />
+    <Compile Include="Controller\ResolucaoController.cs" />
+    <Compile Include="VO\SintegraVO.cs" />
+    <Compile Include="VO\SpedFiscalC370VO.cs" />
+    <Compile Include="VO\AliquotasVO.cs" />
+    <Compile Include="Controller\AliquotasController.cs" />
+    <Content Include="DLLs\ACBr.Net.dll" />
+    <Content Include="DLLs\ACBr32.dll" />
+    <Content Include="DLLs\BemaFI32.dll" />
+    <Content Include="DLLs\BemaMFD.dll" />
+    <Content Include="DLLs\BemaMFD2.dll" />
+    <Content Include="DLLs\capicom.dll" />
+    <Content Include="DLLs\CONVECF.dll" />
+    <Content Include="DLLs\CONVECF95.dll" />
+    <Content Include="DLLs\CONVECF98.dll" />
+    <Content Include="DLLs\DarumaFrameWork.dll" />
+    <Content Include="DLLs\dbxfb.dll" />
+    <Content Include="DLLs\dbxmys.dll" />
+    <Content Include="DLLs\DLLG2.dll" />
+    <Content Include="DLLs\elgin.dll" />
+    <Content Include="DLLs\fbclient.dll" />
+    <Content Include="DLLs\InterfaceEpson.dll" />
+    <Content Include="DLLs\lebin.dll" />
+    <Content Include="DLLs\LeituraMFDBin.dll" />
+    <Content Include="DLLs\libeay32.dll" />
+    <Content Include="DLLs\libmySQL.dll" />
+    <Content Include="DLLs\midas.dll" />
+    <Content Include="DLLs\msxml5.dll" />
+    <Content Include="DLLs\msxml5r.dll" />
+    <Content Include="DLLs\SerialMFD.dll" />
+    <Content Include="DLLs\SERSWEDA.dll" />
+    <Content Include="DLLs\sign_bema.dll" />
+    <Content Include="DLLs\ssleay32.dll" />
+    <Content Include="DLLs\SWecf.dll" />
+    <Content Include="DLLs\swmfd.dll" />
+    <Content Include="imgBotoes\21botaoAjuda.png" />
+    <Content Include="imgBotoes\21botaoCalculadora.png" />
+    <Content Include="imgBotoes\21botaoCancelaCupom.png" />
+    <Content Include="imgBotoes\21botaoCancelaItem.png" />
+    <Content Include="imgBotoes\21botaoCliente.png" />
+    <Content Include="imgBotoes\21botaoDesconto.png" />
+    <Content Include="imgBotoes\21botaoEncerraVenda.png" />
+    <Content Include="imgBotoes\21botaoGaveta.png" />
+    <Content Include="imgBotoes\21botaoMenuFiscal.png" />
+    <Content Include="imgBotoes\21botaoMenuOperacoes.png" />
+    <Content Include="imgBotoes\21botaoMenuPrincipal.png" />
+    <Content Include="imgBotoes\21botaoPesquisa.png" />
+    <Content Include="imgBotoes\21botaoSair.png" />
+    <Content Include="imgBotoes\botaoAjuda.png" />
+    <Content Include="imgBotoes\botaoCalculadora.png" />
+    <Content Include="imgBotoes\botaoCancelaCupom.png" />
+    <Content Include="imgBotoes\botaoCancelaItem.png" />
+    <Content Include="imgBotoes\botaoCliente.png" />
+    <Content Include="imgBotoes\botaoDesconto.png" />
+    <Content Include="imgBotoes\botaoEncerraVenda.png" />
+    <Content Include="imgBotoes\botaoGaveta.png" />
+    <Content Include="imgBotoes\botaoMenuFiscal.png" />
+    <Content Include="imgBotoes\botaoMenuOperacoes.png" />
+    <Content Include="imgBotoes\botaoMenuPrincipal.png" />
+    <Content Include="imgBotoes\botaoPesquisa.png" />
+    <Content Include="imgBotoes\botaoSair.png" />
+    <None Include="imgBotoes\confirmar16.png" />
+    <None Include="imgBotoes\cancelar16.png" />
+    <Content Include="imgLayout\Envelope.gif" />
+    <Content Include="imgLayout\Menu.jpg" />
+    <Content Include="imgLayout\Menu.png" />
+    <Content Include="imgLayout\PenDrive.jpg" />
+    <Content Include="imgLayout\SubMenu.png" />
+    <Content Include="imgLayout\Tela1024x768.jpg" />
+    <Content Include="imgLayout\Tela800x600.jpg" />
+    <Content Include="imgProdutos\0001170000005.jpg" />
+    <Content Include="imgProdutos\0001190000009.jpg" />
+    <Content Include="imgProdutos\0001234567898.jpg" />
+    <Content Include="imgProdutos\0012354600333.jpg" />
+    <Content Include="imgProdutos\0013253095907.jpg" />
+    <Content Include="imgProdutos\0312011604499.jpg" />
+    <Content Include="imgProdutos\0407011150500.jpg" />
+    <Content Include="imgProdutos\0507021132142.jpg" />
+    <Content Include="imgProdutos\0605021008457.jpg" />
+    <Content Include="imgProdutos\0706031233270.jpg" />
+    <Content Include="imgProdutos\1603041234428.jpg" />
+    <Content Include="imgProdutos\2106021651318.jpg" />
+    <Content Include="imgProdutos\2608021837544.jpg" />
+    <Content Include="imgProdutos\3011010827133.jpg" />
+    <Content Include="imgProdutos\7896572014056.jpg" />
+    <Content Include="imgProdutos\padrao.png" />
+    <Content Include="imgSplash\imgBanco.jpg" />
+    <Content Include="imgSplash\imgECF.jpg" />
+    <Content Include="imgSplash\imgOperadoras.jpg" />
+    <Content Include="imgSplash\imgPrincipal.jpg" />
+    <Content Include="imgSplash\imgTEF.jpg" />
+    <None Include="imgTelas\arrowright_green16.png" />
+    <None Include="imgTelas\arrowleft_green16.png" />
+    <Content Include="imgTelas\btnLocalizar05.gif" />
+    <Content Include="imgTelas\Login2.jpg" />
+    <Content Include="imgTelas\telaCadeadoFechado01.png" />
+    <Content Include="imgTelas\telaCarrinho02.png" />
+    <Content Include="imgTelas\telaChave06.png" />
+    <Content Include="imgTelas\telaDinheiro01.png" />
+    <Content Include="imgTelas\telaDinheiro03.png" />
+    <Content Include="imgTelas\telaDinheiro05.png" />
+    <Content Include="imgTelas\telaDocumento04.png" />
+    <Content Include="imgTelas\telaDocumento07.png" />
+    <Content Include="imgTelas\telaExcluirProduto.png" />
+    <Content Include="imgTelas\telaHomem09.png" />
+    <Content Include="imgTelas\telaLupa06.png" />
+    <Content Include="imgTelas\telaMesclar01.png" />
+    <Content Include="imgTelas\telaMonitor04.png" />
+    <Content Include="imgTelas\telaNotaFiscal.png" />
+    <Content Include="imgTelas\telaPrint09.png" />
+    <Content Include="imgTelas\telaRegistradora01.png" />
+    <Content Include="imgTelas\telaRelatorio01.png" />
+    <Content Include="imgTelas\telaRelatorio02.png" />
+    <Content Include="imgTelas\telaSair01.png" />
+    <Content Include="imgTelas\telaUsuarioSenha01.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.0">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4 %28x86 and x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Windows.Installer.3.1">
+      <Visible>False</Visible>
+      <ProductName>Windows Installer 3.1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="DLLs\CONVECF.lib" />
+    <None Include="DLLs\hwinterface.sys" />
+    <None Include="DLLs\InterfaceEpson.lib" />
+    <None Include="DLLs\RSA.BIN" />
+    <None Include="DLLs\SWecf.lib" />
+    <None Include="imgLayout\Thumbs.db" />
+    <None Include="imgProdutos\Thumbs.db" />
+    <None Include="imgSplash\Thumbs.db" />
+    <None Include="imgTelas\Thumbs.db" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\UArquivoMFD.resx">
+      <DependentUpon>UArquivoMFD.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\UCaixa.resx">
+      <DependentUpon>UCaixa.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\UCancelaPreVenda.resx">
+      <DependentUpon>UCancelaPreVenda.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\UCargaPDV.resx">
+      <DependentUpon>UCargaPDV.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\UCarregaDAV.resx">
+      <DependentUpon>UCarregaDAV.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\UCheques.resx">
+      <DependentUpon>UCheques.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\UDataModule.resx">
+      <DependentUpon>UDataModule.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\UDAVEmitidos.resx">
+      <DependentUpon>UDAVEmitidos.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\UDescontoAcrescimo.resx">
+      <DependentUpon>UDescontoAcrescimo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\UEfetuaPagamento.resx">
+      <DependentUpon>UEfetuaPagamento.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\UEncerraMovimento.resx">
+      <DependentUpon>UEncerraMovimento.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\UEspelhoMFD.resx">
+      <DependentUpon>UEspelhoMFD.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\UEstoque.resx">
+      <DependentUpon>UEstoque.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\UFechaEfetuaPagamento.resx">
+      <DependentUpon>UFechaEfetuaPagamento.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\UFichaTecnica.resx">
+      <DependentUpon>UFichaTecnica.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\UIdentificaCliente.resx">
+      <DependentUpon>UIdentificaCliente.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\UImportaCliente.resx">
+      <DependentUpon>UImportaCliente.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\UImportaNumero.resx">
+      <DependentUpon>UImportaNumero.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\UImportaProduto.resx">
+      <DependentUpon>UImportaProduto.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\UIniciaMovimento.resx">
+      <DependentUpon>UIniciaMovimento.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\ULMFC.resx">
+      <DependentUpon>ULMFC.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\ULMFS.resx">
+      <DependentUpon>ULMFS.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\ULocaliza.resx">
+      <DependentUpon>ULocaliza.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\ULoginGerenteSupervisor.resx">
+      <DependentUpon>ULoginGerenteSupervisor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\UMeiosPagamento.resx">
+      <DependentUpon>UMeiosPagamento.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\UMenuFiscal.resx">
+      <DependentUpon>UMenuFiscal.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\UMenuOperacoes.resx">
+      <DependentUpon>UMenuOperacoes.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\UMenuPrincipal.resx">
+      <DependentUpon>UMenuPrincipal.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\UMesclaDAV.resx">
+      <DependentUpon>UMesclaDAV.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\UMesclaPreVenda.resx">
+      <DependentUpon>UMesclaPreVenda.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\UMovimentoAberto.resx">
+      <DependentUpon>UMovimentoAberto.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\UMovimentoECF.resx">
+      <DependentUpon>UMovimentoECF.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\UNotaFiscal.resx">
+      <DependentUpon>UNotaFiscal.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\UParcelamento.resx">
+      <DependentUpon>UParcelamento.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\UPenDrive.resx">
+      <DependentUpon>UPenDrive.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\USplash.resx">
+      <DependentUpon>USplash.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\USubMenuGerente.resx">
+      <DependentUpon>USubMenuGerente.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\USubMenuSupervisor.resx">
+      <DependentUpon>USubMenuSupervisor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\UValorReal.resx">
+      <DependentUpon>UValorReal.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\UVendasPeriodo.resx">
+      <DependentUpon>UVendasPeriodo.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="imgMarketing\" />
+    <Folder Include="Resources\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PreBuildEvent>
+    </PreBuildEvent>
+    <PostBuildEvent>
+    </PostBuildEvent>
+  </PropertyGroup>
+</Project>

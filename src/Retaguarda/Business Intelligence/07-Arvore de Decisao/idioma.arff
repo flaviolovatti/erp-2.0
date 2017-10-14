@@ -1,0 +1,17 @@
+@relation Idioma
+
+@attribute TipoEscola {Publica, Privada}
+
+@attribute Graducao {Sim, Nao}
+
+@attribute Ingles {Sim, Nao}
+
+@data
+Publica, Sim, Sim
+Publica, Nao, Nao
+Publica, Sim, Nao
+Privada, Sim, Sim
+Privada, Sim, Sim
+Privada, Sim, Sim
+Privada, Nao, Sim
+Privada, Nao, Sim

@@ -1,0 +1,272 @@
+-----------------------------------------------------
+-- SCRIPT CRIADO POR : MAURO C. PICHILIANI
+-- DATA : 06/09/2006
+-- DESCRIÇÃO: STORED PROCEDURE ST_KMEANS,FUNÇÃO DBO.DIST() 
+-- E TESTES
+-- ATENÇAO: EH PRECISO PRIMEIRO CRIAR A FUNÇÃO DIST ANTES DE 
+-- CRIAR A PROCEDURE ST_KMEANS
+--
+-----------------------------------------------------
+
+/****************************************************************/
+/*
+  Consulta para armazenar na tabela PERFIL
+*/
+/****************************************************************/
+select o.customerid,                   			-- Cliente
+	count(distinct o.orderid) as qtd_pedidos,	-- total de pedidos
+	sum(d.unitprice*d.quantity) as qtd_gasta	-- total de valor gasto
+into perfil
+from orders as o, [order details] as d
+where o.orderid = d.orderid
+group by o.customerid
+order by o.customerid
+
+/****************************************************************/
+/* FUNÇÃO DIST() */
+/*
+  ESTA FUNÇÃO CALCULA A DISTÂNCIA EUCLIDIANA ENTRE DOIS PONTOS
+
+*/
+/****************************************************************/
+CREATE FUNCTION DBO.DIST( @X1 NUMERIC(20,4),
+                          @Y1 NUMERIC(20,4),
+                          @X2 NUMERIC(20,4),
+                          @Y2 NUMERIC(20,4)) 
+RETURNS NUMERIC(20,4)
+AS
+BEGIN
+	DECLARE @RET NUMERIC(20,4)
+
+	SET @RET = SQRT( POWER(@Y2-@Y1,2) + POWER(@X2-@X1,2) )
+
+	RETURN @RET
+
+END
+
+/****************************************************************/
+/* TESTES DA FUNÇÃO DIST */
+/****************************************************************/
+
+SELECT DBO.DIST(1,1,1,1)
+SELECT DBO.DIST(1,1,2,4)
+
+
+/****************************************************************/
+/* STORED PROCEDURE ST_KMEANS PARA SOMENTE DOIS ATRIBUTOS */
+/****************************************************************/
+
+DROP PROCEDURE ST_KMEANS 
+CREATE PROCEDURE ST_KMEANS  @TAB VARCHAR(100),
+                            @COLX VARCHAR(100),
+			    @COLY VARCHAR(100),
+                            @K TINYINT,
+			    @PAR BIT = 0  /* ESTE PARÂMETRO INDICA SE AS 
+						COORDENADAS DOS CLUSTERS DEVEM SER RETORNADAS OU NÃO*/
+
+AS
+BEGIN
+	
+	SET NOCOUNT ON
+
+	DECLARE @CMD VARCHAR(8000) -- COMANDOS CONSTRUÍDOS DINAMICAMENTE
+
+	-- VERIFICAÇÕES INICIAIS
+
+	-- CHECAGEM DA EXISTÊNCIA DA TABELA E DAS COLUNAS
+	IF NOT EXISTS(SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = @TAB)
+	BEGIN
+		SELECT 'TABELA NAO EXISTE NA BASE' AS ERRO
+		RETURN
+	END
+
+	IF NOT EXISTS(SELECT * FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = @TAB AND COLUMN_NAME = @COLX)
+	BEGIN
+		SELECT 'COLUNA ' + @COLX + ' NÃO EXISTE NA TABELA ' + @TAB AS ERRO
+		RETURN
+	END
+
+	IF NOT EXISTS(SELECT * FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = @TAB AND COLUMN_NAME = @COLY)
+	BEGIN
+		SELECT 'COLUNA ' + @COLY + ' NÃO EXISTE NA TABELA ' + @TAB AS ERRO
+		RETURN
+	END
+
+
+	-- TABELAS TEMPORÁRIAS UTILIZADAS NA PROCEDURE	
+
+
+	-- TABELA PARA ARMAZENAR A CÓPIA DOS DADOS
+	CREATE TABLE #K_TEMP
+	(
+		ID INT IDENTITY(1,1),
+		X NUMERIC(20,4),
+		Y NUMERIC(20,4),
+		CLUSTER TINYINT
+			
+	)
+
+	-- TABELA PARA A MATRIZ DE DISTÂNCIAS
+	CREATE TABLE #CROSS
+	(
+		ID_PONTO INT ,
+		ID_CLUSTER INT,
+		DISTANCIA NUMERIC(20,4)
+	)
+
+	-- TABELA AUXILIAR
+	CREATE TABLE #A
+	(
+		ID_PONTO INT ,
+		DISTANCIA NUMERIC(20,4)
+	)
+
+	-- TABELA AUXILIAR
+	CREATE TABLE #B
+	(
+		ID_PONTO INT ,
+		DISTANCIA NUMERIC(20,4),
+		ID_CLUSTER INT
+	)
+
+	-- TABELA AUXILIAR
+	CREATE TABLE #F
+	(
+		ID INT,
+		CX NUMERIC(20,4),
+		CY NUMERIC(20,4)
+	)
+
+	
+	-- TABELA PARA ARMAZENAR AS COORDENADAS DOS CENTRÓIDES
+	CREATE TABLE #TB_CENTROIDES
+	(
+		ID INT,
+		CX NUMERIC(20,4),
+		CY NUMERIC(20,4)
+	)
+
+
+	-- COPIANDO OS DADOS DA TABELA ORIGINAL
+	SET @CMD = 'SELECT   DISTINCT CONVERT(NUMERIC(20,4),' + @COLX + ')'
+	SET @CMD = @CMD + ', CONVERT(NUMERIC(20,4),' + @COLY + ')'
+	SET @CMD = @CMD + ', 1 AS CLUSTER'
+	SET @CMD = @CMD + ' FROM ' + @TAB
+
+	INSERT #K_TEMP
+	EXEC (@CMD)
+
+	-- VERIFICAÇÃO DA QUANTIDADE DE CLUSTERS
+	IF @K <= 0 OR ( @K > (SELECT COUNT(*) FROM #K_TEMP) )
+	BEGIN
+		SELECT 'QUANTIDADE DE CLUSTERS DEVE SER MAIOR QUE ZERO E MENOR QUE A QUANTIDADE DE DADOS'
+		RETURN
+	END
+
+
+	-- PASSO 1: FORNECER UM VALOR PARA OS CENTRÓIDES
+	-- COMO EH A PRIMEIRA VEZ, PEGAR AS K PRIMEIRAS LINHAS
+
+	SET ROWCOUNT @K
+
+	INSERT #TB_CENTROIDES
+	SELECT ID,X,Y 
+	FROM #K_TEMP
+
+	SET ROWCOUNT 0
+
+	
+	-- INICIO DO LOOP
+	DECLARE @LOOP BIT
+	
+	SET @LOOP = 0
+	
+	WHILE @LOOP = 0
+	BEGIN
+
+		-- PASSO 2: GERAR UMA MATRIZ COM AS DISTÂNCIAS ENTRE TODOS OS PONTOS E OS CENTRÓIDES
+
+		TRUNCATE TABLE #CROSS
+		TRUNCATE TABLE #A
+		TRUNCATE TABLE #B
+	
+		INSERT	#CROSS
+		SELECT A.ID, B.ID,  DBO.DIST( A.X, A.Y, B.CX, B.CY )
+		FROM #K_TEMP AS A, #TB_CENTROIDES AS B
+
+		INSERT #A
+		SELECT ID_PONTO, MIN(DISTANCIA) 
+		FROM #CROSS
+		GROUP BY ID_PONTO
+
+		INSERT #B
+		SELECT ID_PONTO, DISTANCIA, (  SELECT ID_CLUSTER  
+					       FROM #CROSS AS B 
+					       WHERE A.ID_PONTO = B.ID_PONTO 
+                                                 AND A.DISTANCIA = B.DISTANCIA  ) AS CLUSTER
+ 
+		FROM #A AS A
+
+		-- PASSO 3: COLOCAR CADA OBJETO NOS CLUSTERS DE ACORDO COM A SUA DISTÂNCIA (MENOR DISTÂNCIA)
+		--       -> QUANDO NENHUM PONTO MUDAR DE GRUPO É O FIM DO ALGORITMO
+
+		UPDATE #K_TEMP 
+		SET CLUSTER = Z.ID_CLUSTER
+		FROM #K_TEMP T INNER JOIN #B Z
+		ON T.ID = Z.ID_PONTO
+		AND CLUSTER <> Z.ID_CLUSTER
+
+		IF @@ROWCOUNT = 0
+		BEGIN
+			SET @LOOP = 1
+			
+			CONTINUE
+		END
+
+		-- PASSO 4: CALCULAR OS NOVOS CENTRÓIDES PARA CADA CLUSTER (MÉDIA DAS COORDENADAS PARA CADA PONTO)
+		--          SOMENTE PARA OS GRUPOS QUE POSSUEM MAIS DE 1 PONTO
+		TRUNCATE TABLE #F
+	
+		INSERT #F
+		SELECT CLUSTER, AVG(X),AVG(Y)
+		FROM #K_TEMP 
+		GROUP BY CLUSTER
+		HAVING COUNT(*) > 1
+
+		UPDATE #TB_CENTROIDES
+		SET CX = F.CX,
+		    CY = F.CY
+		FROM #TB_CENTROIDES  A INNER JOIN #F F
+		ON A.ID = F.ID
+
+		-- PASSO 5: VOLTAR PARA O PASSO 2
+
+	END
+
+
+	-- VERIFICAR SE O USUÁRIO DESEJA SOMENTE AS COORDENADAS DOS CLUSTERS
+	IF @PAR = 1
+	BEGIN
+		SELECT * FROM #TB_CENTROIDES
+		RETURN
+	END			
+
+	SELECT X, Y, CLUSTER
+	FROM #K_TEMP
+	ORDER BY CLUSTER
+
+
+	SET NOCOUNT OFF
+
+	RETURN
+
+END
+
+
+/****************************************************************/
+/* TESTES DA STORED PROCEDURE ST_KMEANS */
+/****************************************************************/
+
+
+EXEC ST_KMEANS 'PERFIL','QTD_PEDIDOS','QTD_GASTA',3
+EXEC ST_KMEANS 'PERFIL','QTD_PEDIDOS','QTD_GASTA',3,1
